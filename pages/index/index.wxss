@@ -1,0 +1,24 @@
+/**index.wxss**/
+.page-body{
+  width: 100%;
+  height: 100%;
+  padding-top: 1px;
+}
+.page-section{
+ margin: 10px 30px; 
+ height: 10%;
+}
+.input-name{
+float: left;
+margin: 7px 5px;
+}
+input{
+  width: 450rpx;
+  border: 1rpx solid #ccc;
+  border-radius:10rpx; 
+  font-size: 16px;
+  height: 35px;
+  text-align: 35px;
+  padding-left: 10px;
+
+}

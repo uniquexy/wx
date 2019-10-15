@@ -1,0 +1,64 @@
+<!--index.wxml-->
+  <form bindsubmit="formSubmit">
+<view class="page-body">
+
+  <view class="page-section">
+  <text class="input-name">用户名称</text>
+    <input class="weui-input" auto-focus placeholder="用户名" name="userName" value="{{userName}}" bindblur='userNameInput'/>
+  </view>
+
+  <view class="page-section">
+  <text class="input-name">身份证号</text>
+    <input class="weui-input" auto-focus placeholder="身份证号" name="userCard" value="{{userCard}}" bindblur='userCardInput'/>
+  </view>
+
+   <view class="page-section">
+   <text class="input-name">联系电话</text>
+    <input class="weui-input" type="number" auto-focus placeholder="电话"  name="userTell" value="{{userTell}}" bindblur='userTellInput'/>
+  </view>
+
+   <view class="page-section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+        <text class="input-name">房间类型</text>
+          <input class="weui-input" type="number" auto-focus placeholder="请选择房类"  name="houseType" value="{{array[index]}}" bindblur='houseTypeInput'/>
+        </view>
+    </picker>
+  </view>
+
+   <view class="page-section">
+    <picker bindchange="bindPickerChangeType" 
+    value="{{hx_index}}"   range="{{roomArray}}" >
+        <view class="picker">
+        <text class="input-name">房间号牌</text>
+          <input class="weui-input" type="number" auto-focus placeholder="请选择房号"  name="room" value="{{roomArray[hx_index]}}" bindblur='roomInput'/>
+        </view>
+    </picker>
+  </view>
+
+  <view class="page-section">
+   <picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+   <view class="picker">
+   <text class="input-name">入住时间</text>
+      <input class="weui-input" name="startTime" value="{{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}">
+      </input>
+    </view>
+ </picker>
+  </view>
+
+  <view class="page-section">
+   <picker mode="multiSelector" value="{{dateTime2}}" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" range="{{dateTimeArray2}}">
+   <view class="picker">
+   <text class="input-name">退房时间</text>
+      <input class="weui-input" name="endTime" value="{{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime2[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}}">
+      </input>
+    </view>
+ </picker>
+  </view>
+
+  <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}"style="margin:30px;" form-type="submit"> 申请
+  </button>
+     
+</view>
+</form>

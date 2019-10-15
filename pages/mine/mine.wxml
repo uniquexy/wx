@@ -1,0 +1,19 @@
+<view class="totle-list">
+        <view class="mineUser">
+          <view class="mineUserImage">
+            <image src='../../src/images/cat.jpg'></image>
+          </view>
+          <view class="mineUserText">
+          <text>{{username}}</text>
+          </view>
+
+        </view>
+    <view  class="setup-list">
+
+            <navigator url='/pages/aboutList/aboutList'>
+                    <image class="mineIcon" src='../../src/images/ic_about_us.png'></image>
+                    <text>我的订单</text>
+                    <image src='../../src/images/icon_arrow_45_45.png'></image>
+            </navigator>
+    </view>
+</view>
