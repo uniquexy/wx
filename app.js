@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    loginUrl:"https://www.2pf0i0.cn/",
   }
 })

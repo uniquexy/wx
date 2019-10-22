@@ -1,0 +1,10 @@
+<!--indexLogin.wxml-->
+<view class="container" wx:if="{{canIUse}}">
+ <image class="banner" src='../../src/images/homepage_adv1.png'></image>
+    <button class='banner-bottom' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+    申请使用
+   </button>
+
+   <text>立信智能门锁 您身边的安全管家</text>
+</view>
+<view wx:else>请升级微信版本</view>

@@ -14,40 +14,20 @@ Page({
     userCard: '',
     houseType:'',
     room:'',
-    array: ['一室', '两室', '三室', '单间'],
-    objectArray: [
-      {
-        id: 0,
-        name: '一室'
-      },
-      {
-        id: 1,
-        name: '两室'
-      },
-      {
-        id: 2,
-        name: '三室'
-      },
-      {
-        id: 3,
-        name: '单间'
-      },
-      {
-        id: 4,
-        name: '请选择房类'
-      }
-    ],
-    index: 4,
+    houseArray:[],
+    input_bottom: 0,
+    index: 0,
     hx_index: 0
   },
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindPickerChange: function (e) {   
+    var houseType = this.data.houseArray[e.detail.value];
+    console.log('picker发送选择改变，携带值为', houseType)
     this.setData({
       index: e.detail.value
     })
     var that = this;
     wx.request({
-      url: "http://localhost:8080/lock/GetHouseByType.action?method=getHouseByType&houseType=" + e.detail.value,
+      url: app.globalData.loginUrl+"lock/GetHouseByType.action?method=getHouseByType&houseType=" + houseType,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
@@ -63,11 +43,58 @@ Page({
 
   },
   bindPickerChangeType: function (e) {
-    console.log('picker发送', e.detail.value)
+    //console.log('picker发送', e.detail.value)
     this.setData({
       hx_index: e.detail.value
     })
 
+  },
+  
+  //电话
+  userTellInput: function (e) {
+
+    let userTell = e.detail.value
+    
+    if (userTell != '') {
+      if (userTell.length === 11) {
+        console.log(userTell);
+        let str = /^1\d{10}$/
+        if (str.test(userTell)) {
+          let userTell = e.detail.value
+          return true
+
+        } else {
+
+          wx.showToast({
+
+            title: '手机号不正确',
+
+            image: '../../src/images/fail.png'
+
+          })
+          return false
+        }
+      } else {
+
+        wx.showToast({
+
+          title: '手机号不正确',
+
+          image: '../../src/images/fail.png'
+
+        })
+        return false
+      }
+    } else {
+      wx.showToast({
+        title: '电话不能为空',
+        image: '../../src/images/fail.png'
+      })
+      return false
+    }
+    this.setData({
+      userTell: e.detail.value
+    })
   },
   // 设置用户名
   userNameInput: function (e) {
@@ -79,8 +106,8 @@ Page({
       wx.showToast({
 
         title: '用户名不能为空',
-        content:'用户名不能为空，请输入'
-        //image: './../../../../images/fail.png'
+        content:'用户名不能为空，请输入',
+        image: '../../src/images/fail.png'
 
       })
       return false
@@ -89,46 +116,6 @@ Page({
       userName: e.detail.value
     })
   },
-  //电话
-  userTellInput: function (e) {
-
-    let userTell = e.detail.value
-
-    if (userTell.length === 11) {
-
-      let checkedNum = this.checkPhoneNum(userTell)
-
-    } else {
-      wx.showToast({
-
-        title: '手机号不正确',
-
-        //image: './../../../../images/fail.png'
-
-      })
-      return false
-    }
-  },
-  checkPhoneNum: function (userTell) {
-
-    let str = /^1\d{10}$/
-
-    if (str.test(userTell)) {
-
-      return true
-
-    } else {
-
-      wx.showToast({
-
-        title: '手机号不正确',
-
-        //image: './../../../../images/fail.png'
-
-      })
-      return false
-    }
-  },
   // 设置身份证号
   userCardInput: function (e) {
     this.setData({
@@ -136,17 +123,10 @@ Page({
     })
   },
   // 设置房屋类型
-  houseTypeInput: function (e) {
-    if(e.detail.value==""){
-      houseType:"一室"
-    }else{
-
-
+  houseTypeInput: function (e) { 
     this.setData({
       houseType: e.detail.value
-    })
-    
-    }
+    })   
   },
   // 设置房间
   roomInput: function (e) {
@@ -178,7 +158,7 @@ Page({
   },
   changeDateTimeColumn2(e) {
     var arr = this.data.dateTime2,
-      dateArr = this.data.dateTimeArray2;
+    dateArr = this.data.dateTimeArray2;
 
     arr[e.detail.column] = e.detail.value;
     dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
@@ -189,6 +169,20 @@ Page({
     });
   },
   onLoad: function (options) {
+    var that = this
+    //获取房间类型
+    wx.request({
+      url: app.globalData.loginUrl +"lock/getHouseInfo.action?method=getHouse",
+      success: function (res) { //请求成功
+        //console.log(res.data.body);//在调试器里打印网络请求到的json数据
+        that.setData({
+          houseArray: res.data.body
+        })
+      },
+      fail: function (res) { // 请求失败
+      }
+    })
+
     // 获取完整的年月日 时分秒，以及默认显示的数组
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -201,8 +195,7 @@ Page({
       dateTimeArray2: obj.dateTimeArray,
       dateTimeArray1: obj1.dateTimeArray,
       dateTime1: obj1.dateTime,
-    });
-    
+    });    
     //验证方法
     this.initValidate();
   },
@@ -244,7 +237,7 @@ Page({
     }
     //向后台发送时数据 wx.request...
     wx.request({
-      url: 'http://localhost:8080/lock/userApplicationInfo.action?method=userApplication',
+      url: app.globalData.loginUrl +'lock/userApplicationInfo.action?method=userApplication',
       header: {
         'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
@@ -294,5 +287,6 @@ Page({
     wx.showModal({
       content: error.msg
     })
-  },
+  }
+ 
 })

@@ -8,6 +8,7 @@ Page({
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
+        //console.log(res);
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: function (res) {
@@ -16,17 +17,18 @@ Page({
               //that.queryUsreInfo();
               //判断是否添加门锁
               //用户已经授权过
-              wx.redirectTo({
-                url: '/pages/mine/mine'
+             // console.log(res);
+              wx.navigateTo({
+                url: '/pages/index/index'
               })
             },
             fail(res) {
               console.log("获取用户信息失败", res)
             }
           });
-        }else {
+        } else {
           console.log("未授权=====")
-          
+
         }
       }
     })
@@ -36,8 +38,8 @@ Page({
       //用户按了允许授权按钮
       var that = this;
       //授权成功后，跳转进入小程序首页
-      wx.redirectTo({
-        url: '/pages/mine/mine'
+      wx.navigateTo({
+        url: '/pages/index/index'
       })
     } else {
       //用户按了拒绝按钮
@@ -54,4 +56,5 @@ Page({
       })
     }
   },
+ 
 })

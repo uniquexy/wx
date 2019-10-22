@@ -4,24 +4,25 @@
 
   <view class="page-section">
   <text class="input-name">用户名称</text>
-    <input class="weui-input" auto-focus placeholder="用户名" name="userName" value="{{userName}}" bindblur='userNameInput'/>
+    <input class="weui-input"  placeholder="用户名" name="userName" value="{{userName}}" bindblur='userNameInput'/>
   </view>
 
   <view class="page-section">
   <text class="input-name">身份证号</text>
-    <input class="weui-input" auto-focus placeholder="身份证号" name="userCard" value="{{userCard}}" bindblur='userCardInput'/>
+    <input class="weui-input"  placeholder="身份证号" name="userCard" value="{{userCard}}" bindblur='userCardInput'/>
   </view>
+
 
    <view class="page-section">
    <text class="input-name">联系电话</text>
-    <input class="weui-input" type="number" auto-focus placeholder="电话"  name="userTell" value="{{userTell}}" bindblur='userTellInput'/>
+    <input class="weui-input" type="number"  placeholder="电话"  name="userTell" value="{{userTell}}" bindblur='userTellInput' />
   </view>
 
    <view class="page-section">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-        <view class="picker">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{houseArray}}">
+        <view class="picker" >
         <text class="input-name">房间类型</text>
-          <input class="weui-input" type="number" auto-focus placeholder="请选择房类"  name="houseType" value="{{array[index]}}" bindblur='houseTypeInput'/>
+          <input class="weui-input" auto-focus placeholder="请选择房类"  name="houseType" value="{{houseArray[index]}}" disabled="false" bindblur='houseTypeInput'/>
         </view>
     </picker>
   </view>
@@ -29,9 +30,9 @@
    <view class="page-section">
     <picker bindchange="bindPickerChangeType" 
     value="{{hx_index}}"   range="{{roomArray}}" >
-        <view class="picker">
+        <view class="picker" >
         <text class="input-name">房间号牌</text>
-          <input class="weui-input" type="number" auto-focus placeholder="请选择房号"  name="room" value="{{roomArray[hx_index]}}" bindblur='roomInput'/>
+          <input class="weui-input" auto-focus placeholder="请选择房号"  name="room" value="{{roomArray[hx_index]}}" disabled="false" bindblur='roomInput'/>
         </view>
     </picker>
   </view>

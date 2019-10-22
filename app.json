@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/indexLogin/indexLogin",
     "pages/setting/setting",
     "pages/index/index",
     "pages/logs/logs",
@@ -10,6 +11,24 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "门锁管理",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#b88e30",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/indexLogin/indexLogin",
+        "text": "首页",
+        "iconPath": "src/images/icon_home_nor.png",
+        "selectedIconPath": "src/images/icon_home_sel.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "src/images/icon_me_nor.png",
+        "selectedIconPath": "src/images/icon_me_sel.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

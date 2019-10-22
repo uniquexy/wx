@@ -20,5 +20,8 @@ input{
   height: 35px;
   text-align: 35px;
   padding-left: 10px;
-
+}
+ .userinfo-avatar{
+  width: 150px;
+  height: 150px;
 }
